@@ -1,0 +1,51 @@
+:root{
+    background-color: rgba(0, 0, 0, 0.986);
+    color: whitesmoke;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/*NAV BAR STYLING/outline*/
+.navbar {
+    color: white;
+    overflow: hidden;
+}
+
+.left-section {
+    float: left;
+}
+
+.right-section {
+    float: right;
+    font-size: 3vh;
+    
+    
+}
+
+.logo {
+    max-width: 22vh; 
+    height: 12vh;
+    margin: 10px; 
+}
+/*navlink and search stuff*/
+.right-section a, .right-section input {
+    display: inline-block;
+    margin: 50px; 
+    color: white;
+    text-decoration: none;
+    transition: 0.7s;
+}
+
+.right-section a:hover{
+color: #fc8877;
+text-decoration: line-through;
+}
+
+.right-section input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
