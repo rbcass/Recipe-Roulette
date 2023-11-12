@@ -1,0 +1,14 @@
+<link rel="stylesheet" href="/css/styles.css">
+<%- include('component/navbar') %>
+<div class="signin">
+    <p class="title-sign-in">Sign in</p>
+
+    <form method="POST" class="sign-in-form">
+        <label class="form-label">Email</label>
+        <input type="email" class="email" name="email">
+        <label class="form-label">Password</label>
+        <input type="password" class="password" name="password">
+        <button type="submit" class="btn btn-primary btn-lg">Login</button>
+        <p>Don't have an account? <a class="minitext" href="/signup">Sign up</a> </p>
+    </form>
+</div>

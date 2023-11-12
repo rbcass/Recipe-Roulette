@@ -49,3 +49,74 @@ text-decoration: line-through;
     border: 1px solid #ccc;
     border-radius: 3px;
 }
+
+/* MAINPAGE CSS*/
+.main-page-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 60vh; 
+    font-size: 8vh;
+    
+  }
+  
+  .left-section {
+    text-align: left;
+    
+    padding: 20px;
+  }
+  
+  .pink-text {
+    color: #fc8877; 
+    font-size: 50px; 
+    
+  }
+  
+  .white-text {
+    color: #ffffff; 
+    font-size: 30px; 
+    margin: 0;
+  }
+
+  /*SIGN IN LOG IN CSS*/
+  .signin {
+    display: flex;
+    background: url('https://media.giphy.com/media/5H9lYCAg46Vp2dAqsu/giphy.gif');
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+  .title-sign-in {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  .sign-in-form {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #ddd; /* Border color */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle box shadow */
+  }
+  
+  .form-label {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .email,
+  .password {
+    padding: 15px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .minitext{
+    text-decoration: underline white;
+    color: white;
+  }
