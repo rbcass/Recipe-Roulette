@@ -90,6 +90,7 @@ text-decoration: line-through;
   .title-sign-in {
     font-size: 36px;
     margin-bottom: 20px;
+    text-align: center;
   }
   
   .sign-in-form {
