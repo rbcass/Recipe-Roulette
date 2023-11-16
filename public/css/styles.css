@@ -121,3 +121,27 @@ text-decoration: line-through;
     text-decoration: underline white;
     color: white;
   }
+
+
+.dashboard{
+      width: 80%;
+      margin: 50px auto;
+      padding: 20px;
+      color: #000000;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      font-size: 30px;
+      background-color: #ddd;
+  }
+
+  .user-info {
+    text-align: center;
+  }
+
+  .user-info h2 {
+    color: #000000;
+  }
+
+  .user-info p {
+    color: #777;
+  }

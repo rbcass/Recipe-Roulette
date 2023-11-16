@@ -5,17 +5,25 @@ const User = require('../models/User')
 const bcrypt = require('bcrypt')
 
 
+//local (use user data in views)
+const setUserLocals = async (req, res, next) => {
+    res.locals.user = req.session.userId ? await User.findById(req.session.userId) : null;
+    next();
+};
+
+app.use(setUserLocals)
+
 
 //easy way to manage routes!
 
-
+//landing
 router.get('/', (req,res) =>{
-    res.render('main')
+    res.render('main', { username: user.username, user: user })
 })
 
 //LOG IN ROUTES
 router.get('/login', (req,res) =>{
-    res.render('login')
+    res.render('login', { user: req.session.user || null })
 })
 
 router.post('/login', async (req,res) =>{
@@ -46,7 +54,7 @@ router.post('/login', async (req,res) =>{
 
 //sign up logic
 router.get('/signup', (req,res) =>{
-    res.render('signup')
+    res.render('signup', { user: req.session.user })
 })
 
 router.post('/signup', async (req,res) => {
@@ -77,7 +85,7 @@ router.post('/signup', async (req,res) => {
  
 })
 
-//dashboard (after log in)
+//dashboard (after log in), maybe add image, bio if have time
 router.get('/dashboard', async (req, res) => {
     try {
         //check session
@@ -91,12 +99,21 @@ router.get('/dashboard', async (req, res) => {
             return res.redirect('/login'); 
         }
 
-        res.render('dashboard', { username: user.username }); 
+        res.render('dashboard', { user: user }); 
     } catch (error) {
         console.error(error);
         res.render('dashboard', { error: 'Error fetching user information' });
     }
 })
 
+//logout logic
+router.get('/logout', (req, res) => {
+    req.session.destroy(err => {
+      if (err) {
+        console.error('Error destroying session:', err);
+      }
+      res.redirect('/'); 
+    });
+  });
 
 module.exports = router;
