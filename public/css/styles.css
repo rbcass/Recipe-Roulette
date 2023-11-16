@@ -27,8 +27,8 @@ body {
 
 .logo {
     max-width: 22vh; 
-    height: 12vh;
-    margin: 10px; 
+    height: 13vh; 
+    margin: 30px 10px 10px 10px;
 }
 /*navlink and search stuff*/
 .right-section a, .right-section input {
@@ -55,27 +55,56 @@ text-decoration: line-through;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    height: 60vh; 
-    font-size: 8vh;
-    
+    height: 70vh; 
+    font-size: 9vh;
+    line-height: 0.6;
   }
   
   .left-section {
     text-align: left;
-    
-    padding: 20px;
+    padding-left: 3vh;
+
+    /* padding: 20px; */
   }
   
   .pink-text {
     color: #fc8877; 
     font-size: 50px; 
+    padding-left: 10px;
     
   }
   
   .white-text {
     color: #ffffff; 
     font-size: 30px; 
+    padding-left: 10px;
+
     margin: 0;
+  }
+
+  /*gallery*/
+  .right-section{
+    float: right;
+    margin-left: auto;
+    margin-top: 20px;
+    overflow: hidden;
+
+  }
+
+  .image-gallery{
+    overflow: hidden;
+    margin: 0 auto;
+    border-radius: 10px;
+    padding-right: 9vh;
+    margin-top: 5vh;
+    width: 800px;
+    height: 600px;
+  }
+
+  .image-gallery img {
+    height: 500px;
+    object-fit: cover;
+    max-width: 100%;
   }
 
   /*SIGN IN LOG IN CSS*/

@@ -1,3 +1,7 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <div class="main-page-header">
     <div class="left-section">
       <p>Are you hungry?<br>
@@ -5,4 +9,22 @@
         <span class="white-text">Explore a world of culinary delights</span>
       </p>
     </div>
+    <div class="right-section">
+      <!--moving gallery??? yes yes yes-->
+      <div class="image-gallery">
+        <div><img src="https://i.ibb.co/YLK7xqC/Lasagna-2.jpg" alt="Lasagna-2" border="0"></div>
+        <div><img src="https://i.ibb.co/7RFztx8/bbqwings.jpg" alt="bbqwings" border="0"></div>
+        <div><img src="https://i.ibb.co/dQpsGD9/waffle.jpg" alt="waffle" border="0"></div>
+      </div>
+    </div>
   </div>
+  <script>
+    $(document).ready(function(){
+      $('.image-gallery').slick({
+        autoplay: true,
+        autoplaySpeed: 3500,
+        infinite:true,
+        dots: true
+      })
+    })
+  </script>
