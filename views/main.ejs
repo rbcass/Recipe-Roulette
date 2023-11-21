@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!--main.ejs is like the container of all the pages-->
 <html lang="en">
@@ -8,7 +9,8 @@
     <title>Recipe Roulette</title>
 </head>
 <body>
-   <%- include('component/navbar') %>
+
+   <%- include('component/navbar', { user: user}) %>
    <%- include('component/headermain') %>
 </body>
 </html>

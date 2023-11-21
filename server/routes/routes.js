@@ -1,8 +1,11 @@
 const express = require('express')
 const router = express.Router()
 const passport = require('passport')
+const { isAuthenticated } = require('./auth')
 const User = require('../models/User')
+const Recipe = require('../models/Recipe')
 const bcrypt = require('bcrypt')
+const app = express();
 
 
 //local (use user data in views)
@@ -11,14 +14,14 @@ const setUserLocals = async (req, res, next) => {
     next();
 };
 
-app.use(setUserLocals)
+router.use(setUserLocals)
 
 
 //easy way to manage routes!
 
 //landing
 router.get('/', (req,res) =>{
-    res.render('main', { username: user.username, user: user })
+    res.render('main', { user: res.locals.user })
 })
 
 //LOG IN ROUTES
@@ -43,6 +46,7 @@ router.post('/login', async (req,res) =>{
 
         //user session and redirection if succesful
         req.session.userId = u_ser._id;
+        req.session.save()
 
         res.redirect('/dashboard'); // Redirect to dashboard or home page after login
     } catch (error) {
@@ -54,7 +58,7 @@ router.post('/login', async (req,res) =>{
 
 //sign up logic
 router.get('/signup', (req,res) =>{
-    res.render('signup', { user: req.session.user })
+    res.render('signup', { user: res.locals.user })
 })
 
 router.post('/signup', async (req,res) => {
@@ -116,4 +120,57 @@ router.get('/logout', (req, res) => {
     });
   });
 
+
+
+  //RECIPE ROUTES & LOGIC
+
+//GET
+router.get('/recipe', async (req, res) => {
+    try {
+        const recipes = await Recipe.find();
+
+        res.render('recipe', { recipes:recipes});
+    } catch (error) {
+        console.error(error);
+        res.render('error', { error: 'Error fetching recipes' });
+    }
+});
+
+//POST RECIPE
+  router.post('/recipe', async (req, res) => {
+    const { title, ingredients, instructions, imageUrl, totalTime } = req.body;
+    try {
+        // new doc
+        const newRecipe = new Recipe({
+            title,
+            ingredients,
+            instructions,
+            imageUrl,
+            totalTime,
+        });
+
+        await newRecipe.save();
+
+        
+        res.redirect('/recipe');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+//individual recipe?
+router.get('/:recipeId', async (req, res) => {
+    const { recipeId } = req.params;
+  
+    try {
+      const recipe = await Recipe.findById(recipeId);
+  
+      res.render('recipeDetails', { recipe });
+    } catch (error) {
+      console.error(error);
+      res.render('error', { error: 'Error fetching the recipe' });
+    }
+  });
+  
 module.exports = router;

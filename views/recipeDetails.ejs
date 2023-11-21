@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<%- include('component/navbar') %>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= recipe.title %></title>
+</head>
+<body>
+    <div class="recipe-details">
+        <h1><%= recipe.title %></h1>
+        <img src="<%= recipe.imageUrl %>" alt="<%= recipe.title %>">
+        <p>Ingredients: <%= recipe.ingredients %></p>
+        <p>Instructions: <%= recipe.instructions %></p>
+        <p>Total Time: <%= recipe.totalTime %></p>
+        <a href="/recipe">Back to Recipes</a>
+    </div>
+</body>
+</html>

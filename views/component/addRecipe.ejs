@@ -1,0 +1,15 @@
+<!--pop up form for adding recipes-->
+<form action="/recipes/add" method="post">
+    <label for="title">Recipe Title:</label>
+    <input type="text" id="title" name="title" required>
+    <label for="ingredients">Ingredients (comma-separated):</label>
+    <input type="text" id="ingredients" name="ingredients" required>
+    <label for="instructions">Instructions:</label>
+    <textarea id="instructions" name="instructions" required></textarea>
+    <label for="imageUrl">Image URL:</label>
+    <input type="text" id="imageUrl" name="imageUrl">
+    <label for="totalTime">Total Time:</label>
+    <input type="text" id="totalTime" name="totalTime">
+
+    <button type="submit">Add Recipe</button>
+</form>

@@ -5,6 +5,7 @@ const router = require('./server/routes/routes')
 const mongoose = require('mongoose');
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
+const MongoDBStore = require('connect-mongodb-session')(session);
 const port= 4000;
 const env = require('dotenv')
 env.config()
@@ -14,10 +15,9 @@ const bodyParser = require('body-parser');
 //bla
 const secretKey = randomString(666);
 const User = require('./server/models/User')
+const Recipe = require('./server/models/Recipe')
 
 //middleware
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(cookieParser());
 app.use(session({
   secret: secretKey,
   resave: true,
@@ -25,8 +25,13 @@ app.use(session({
 }))
 app.use((req, res, next) => {
     req.User = User;
+    req.Recipe = Recipe;
     next();
   });
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieParser());
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -38,7 +43,6 @@ app.use(bodyParser.json());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use('/',router)
-
 
 
 //connect to server & cluster

@@ -1,17 +1,21 @@
+
 <nav class="navbar">
     <div class="left-section">
-        <a href="/"><img src="https://i.ibb.co/JrSb1Z8/roulettelogo.png" alt="roulettelogo" class='logo' border="0"></a>
+      <a href="/"><img src="https://i.ibb.co/JrSb1Z8/roulettelogo.png" alt="roulettelogo" class='logo' border="0"></a>
     </div>
     <div class="right-section">
-        <a href="/about">About</a>
-        <a href="/recipes">Recipes</a>
-        <!--logic for log in session/navbar change!-->
-        <% if (user && user.username) { %>
-            <a href="/dashboard">Dashboard</a>
-            <a href="/logout">Logout</a>
-        <% } else { %>
-            <a href="/login">Login</a>
-        <% } %>
-        <input type="text" placeholder="Search">
+      <a href="/about">About</a>
+      <a href="/recipe">Recipes</a>
+  
+      <% const isLoggedIn = !!user %>
+  
+      <% if (isLoggedIn) { %>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/logout">Logout</a>
+      <% } else { %>
+        <a href="/login">Login</a>
+      <% } %>
+  
+      <input type="text" placeholder="Search">
     </div>
-</nav>
+  </nav>

@@ -1,7 +1,53 @@
 <link rel="stylesheet" href="/css/styles.css">
-<%- include('component/navbar', {user: user}) %>
+<%- include('component/navbar', { user: user }) %>
 <div class="dashboard">
-    <div class="user-info"
-    <h2>Welcome, <%= user.username %></h2>
-</div>
+    <div class="user-info">
+        <h2>Welcome, <%= user.username %></h2>
+    </div>
+    <button id="addRecipeButton" onclick="showForm()">Add Recipe</button>
+
+    <!-- hard code form -->
+    <div id="recipeForm" class="recipe-form" style="display: none;">
+        <form class="form-recipe" action="/recipe" method="POST">
+            <label for="title">Recipe Title:</label>
+            <input type="text" id="title" name="title" required>
+            <label for="ingredients">Ingredients (use commas):</label>
+            <input type="text" id="ingredients" name="ingredients" required>
+            <label for="instructions">Instructions:</label>
+            <textarea id="instructions" name="instructions" required></textarea>
+            <label for="imageUrl">Image URL:</label>
+            <input type="text" id="imageUrl" name="imageUrl">
+            <label for="totalTime">Total Time:</label>
+            <input type="text" id="totalTime" name="totalTime">
+
+            <button type="submit">Add Recipe</button>
+        </form>
+    </div>
+
+    <script>
+
+        //even listeners for toggle menu stuff.
+        document.addEventListener('DOMContentLoaded', function () {
+
+    var recipeForm = document.getElementById('recipeForm');
+    var addRecipeButton = document.getElementById('addRecipeButton');
+
+    //click
+    addRecipeButton.addEventListener('click', function () {
+        if (recipeForm.style.display === 'none' || recipeForm.style.display === '') {
+            recipeForm.style.display = 'block';
+        } else {
+            recipeForm.style.display = 'none';
+        }
+    });
+
+    //off
+    document.addEventListener('click', function (event) {
+        var isClickInside = recipeForm.contains(event.target) || event.target.id === 'addRecipeButton';
+        if (!isClickInside) {
+            recipeForm.style.display = 'none';
+        }
+    });
+});
+    </script>
 </div>
