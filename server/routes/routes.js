@@ -24,6 +24,11 @@ router.get('/', (req,res) =>{
     res.render('main', { user: res.locals.user })
 })
 
+//about for optics
+router.get('/about', (req,res) =>{
+    res.render('about',{ user: res.locals.user })
+})
+
 //LOG IN ROUTES
 router.get('/login', (req,res) =>{
     res.render('login', { user: req.session.user || null })
@@ -159,8 +164,8 @@ router.get('/recipe', async (req, res) => {
     }
 });
 
-//individual recipe?
-router.get('/:recipeId', async (req, res) => {
+//individual recipe? yes
+router.get('/recipes/:recipeId', async (req, res) => {
     const { recipeId } = req.params;
   
     try {
@@ -174,3 +179,20 @@ router.get('/:recipeId', async (req, res) => {
   });
   
 module.exports = router;
+
+
+//SEARCH LOGIC
+router.post('/search', async (req, res)=>{
+   // const searchItem = req.body.searchItem;
+    //more specific regex
+    let searchPattern = new RegExp(req.query.search, 'i')
+    let rgxString = searchPattern.toString().slice(1, -1)
+    try {
+        const searchResults = await Recipe.find({ title: { $regex: rgxString, $options: 'i' } });
+        res.render('search', { searchResults });
+      } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+      }
+    
+})

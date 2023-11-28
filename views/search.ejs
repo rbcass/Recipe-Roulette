@@ -1,0 +1,20 @@
+<!--Try title first, Search page.-->
+<link rel="stylesheet" href="/css/styles.css">
+<%- include('component/navbar') %>
+<body>
+  <h2>Search Results</h2>
+  <% if (searchResults.length === 0) { %>
+    <p>No results found.</p>
+  <% } else { %>
+    <ul>
+      <% searchResults.forEach(recipe => { %>
+        <li>
+          <h3><%= recipe.title %></h3>
+          <p>Ingredients: <%= recipe.ingredients.join(', ') %></p>
+          <p>Total Time: <%= recipe.totalTime %> minutes</p>
+          <a href="/recipes/<%= recipe._id %>">View Details</a>
+        </li>
+      <% }); %>
+    </ul>
+  <% } %>
+</body>
