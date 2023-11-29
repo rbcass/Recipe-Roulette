@@ -185,10 +185,21 @@ module.exports = router;
 router.post('/search', async (req, res)=>{
    // const searchItem = req.body.searchItem;
     //more specific regex
-    let searchPattern = new RegExp(req.query.search, 'i')
+    let searchPattern = new RegExp(req.body.search, 'i')
     let rgxString = searchPattern.toString().slice(1, -1)
+    console.log('Regex String:', rgxString)
     try {
-        const searchResults = await Recipe.find({ title: { $regex: rgxString, $options: 'i' } });
+       // const searchResults = await Recipe.find({ title: { $regex: rgxString, $options: 'i' } });
+      // const searchResults = await Recipe.find({ title: req.body.search });
+
+       console.log('Raw Search Term:', req.body.search);
+
+         // reget without trim
+        let searchPattern = new RegExp(req.body.search, 'i');
+        console.log('Regex String:', searchPattern.toString().slice(1, -1));
+
+          // query (debug)
+         const searchResults = await Recipe.find({ title: { $regex: searchPattern } });
         res.render('search', { searchResults });
       } catch (err) {
         console.error(err);

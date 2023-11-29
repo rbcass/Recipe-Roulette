@@ -2,6 +2,9 @@
 <link rel="stylesheet" href="/css/styles.css">
 <%- include('component/navbar') %>
 <body>
+    <%
+    console.log('Search Results:', searchResults);
+%>
   <h2>Search Results</h2>
   <% if (searchResults.length === 0) { %>
     <p>No results found.</p>
