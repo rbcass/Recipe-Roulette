@@ -190,28 +190,32 @@ text-decoration: line-through;
 }
 
 .recipe-box {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    color: #000000;
-    width: 30%; 
-    height: 20vh;
-    margin: 10px;
-    box-sizing: border-box;
-    /* margin: 10px; */
-    padding: 15px;
-    max-width: 300px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  color: #000000;
+  width: 30%; 
+  margin: 10px;
+  box-sizing: border-box;
+  /* margin: 10px; */
+  padding: 15px;
+  max-width: 300px;
+  display: flex; 
+  flex-direction: column; 
 }
 
 .recipe-box img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
+  max-width: 100%;
+  max-height: 100%; 
+  height: auto;
+  border-radius: 8px;
+  flex-shrink: 0;
 }
 
 .recipe-box h2 {
     margin-top: 10px;
     font-size: 1.5em;
+    flex-grow: 1;
 }
 
 .recipe-box a {
