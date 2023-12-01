@@ -6,6 +6,9 @@ const User = require('../models/User')
 const Recipe = require('../models/Recipe')
 const bcrypt = require('bcrypt')
 const app = express();
+const axios = require('axios')
+const chatbotRequest = require('./chatbot'); 
+require('dotenv').config();
 
 
 //local (use user data in views)
@@ -20,10 +23,24 @@ router.use(setUserLocals)
 //easy way to manage routes!
 
 //landing
-router.get('/', (req,res) =>{
-    res.render('main', { user: res.locals.user })
-})
-
+router.get('/', async (req, res) => {
+    try {
+        const chatbotResponse = await chatbotRequest.makeChatbotRequest();
+        res.render('main', {
+            user: res.locals.user,
+            RAPIDAPI_KEY: process.env.RAPIDAPI_KEY,
+            SESSION_ID: process.env.SESSION_ID,
+            chatbotResponse: chatbotResponse,
+        });
+    } catch (error) {
+        res.render('main', {
+            user: res.locals.user,
+            RAPIDAPI_KEY: process.env.RAPIDAPI_KEY,
+            SESSION_ID: process.env.SESSION_ID,
+            chatbotResponse: 'Error fetching data',
+        });
+    }
+});
 //about for optics
 router.get('/about', (req,res) =>{
     res.render('about',{ user: res.locals.user })
@@ -207,3 +224,7 @@ router.post('/search', async (req, res)=>{
       }
     
 })
+
+
+//ROBO API [B^/]
+

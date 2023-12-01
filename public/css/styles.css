@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&display=swap');
 :root{
     background-color: rgba(0, 0, 0, 0.986);
     color: whitesmoke;
+    font-family: 'Hedvig Letters Serif', serif;
 }
 
 body {
@@ -65,6 +67,7 @@ text-decoration: line-through;
     height: 70vh; 
     font-size: 9vh;
     line-height: 0.6;
+    background-color: #141414;
   }
   
   .left-section {
@@ -265,4 +268,59 @@ text-decoration: line-through;
 
 .recipe-details a:hover {
   text-decoration: underline;
+}
+
+
+/*ABOUT PAGE*/
+.about-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  color: #000000;
+  align-items: center;
+  background: url(https://ibb.co/Fzt4ccv)
+}
+
+.middle-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center; 
+  transition: transform 0.5s ease;
+}
+
+.middle-content h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.middle-content p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.chatterbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.middle-content :hover{
+  transform: scale(1.15);
 }
