@@ -8,8 +8,17 @@
         <label class="form-label">Email</label>
         <input type="email" class="email" name="email">
         <label class="form-label">Password</label>
-        <input type="password" class="password" name="password">
+        <div class="passwordtoggle">
+        <input type="password" class="password" id="passwordInput" name="password">
+        <span class="password-toggle" onclick="togglePasswordVisibility()" style="cursor: pointer;">👁️</span>
+        </div>
         <button type="submit" class="btn btn-primary btn-lg">Login</button>
         <p>Don't have an account? <a class="minitext" href="/signup">Sign up</a> </p>
     </form>
 </div>
+<script>
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById('passwordInput');
+        passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+    }
+</script>

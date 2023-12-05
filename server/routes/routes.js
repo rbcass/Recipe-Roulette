@@ -23,17 +23,26 @@ router.use(setUserLocals)
 //easy way to manage routes!
 
 //landing
-router.get('/', async (req, res) => {
+router.get('/', (req, res) => {
+    res.render('main', {
+        user: res.locals.user,
+        
+    });
+});
+
+// about page (chatbot)
+router.get('/about', async (req, res) => {
     try {
+        
         const chatbotResponse = await chatbotRequest.makeChatbotRequest();
-        res.render('main', {
+        res.render('about', {
             user: res.locals.user,
             RAPIDAPI_KEY: process.env.RAPIDAPI_KEY,
             SESSION_ID: process.env.SESSION_ID,
             chatbotResponse: chatbotResponse,
         });
     } catch (error) {
-        res.render('main', {
+        res.render('about', {
             user: res.locals.user,
             RAPIDAPI_KEY: process.env.RAPIDAPI_KEY,
             SESSION_ID: process.env.SESSION_ID,
@@ -41,10 +50,6 @@ router.get('/', async (req, res) => {
         });
     }
 });
-//about for optics
-router.get('/about', (req,res) =>{
-    res.render('about',{ user: res.locals.user })
-})
 
 //LOG IN ROUTES
 router.get('/login', (req,res) =>{
