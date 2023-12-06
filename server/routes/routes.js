@@ -4,6 +4,7 @@ const passport = require('passport')
 const { isAuthenticated } = require('./auth')
 const User = require('../models/User')
 const Recipe = require('../models/Recipe')
+const Comment = require('../models/Comment')
 const bcrypt = require('bcrypt')
 const app = express();
 const axios = require('axios')
@@ -130,7 +131,11 @@ router.get('/dashboard', async (req, res) => {
             return res.redirect('/login'); 
         }
 
-        res.render('dashboard', { user: user }); 
+        //displaying users recipes on their dashboard
+        const recipes = await Recipe.find({ user: req.session.userId }).populate('user')
+
+
+        res.render('dashboard', { user: user, recipes: recipes }); 
     } catch (error) {
         console.error(error);
         res.render('dashboard', { error: 'Error fetching user information' });
@@ -167,8 +172,11 @@ router.get('/recipe', async (req, res) => {
   router.post('/recipe', async (req, res) => {
     const { title, ingredients, instructions, imageUrl, totalTime } = req.body;
     try {
+
+        const userId = req.session.userId;
         // new doc
         const newRecipe = new Recipe({
+            user: userId,
             title,
             ingredients,
             instructions,
@@ -182,7 +190,7 @@ router.get('/recipe', async (req, res) => {
         res.redirect('/recipe');
     } catch (error) {
         console.error(error);
-        res.status(500).send('Internal Server Error');
+        res.status(500).send('Server Error');
     }
 });
 
@@ -191,9 +199,13 @@ router.get('/recipes/:recipeId', async (req, res) => {
     const { recipeId } = req.params;
   
     try {
-      const recipe = await Recipe.findById(recipeId);
+
+        const recipe = await Recipe.findById(recipeId)
+        const User = require('../models/User')
+        const comments = await Comment.find({ recipe: recipeId }).populate({ path: 'user', model: User, select: 'username' });
+      
   
-      res.render('recipeDetails', { recipe });
+      res.render('recipeDetails', { recipe, comments });
     } catch (error) {
       console.error(error);
       res.render('error', { error: 'Error fetching the recipe' });
@@ -233,3 +245,41 @@ router.post('/search', async (req, res)=>{
 
 //ROBO API [B^/]
 
+//COMMENT LOGIC
+router.post('/recipe/:recipeId/comment', async (req, res) => {
+    const { text } = req.body;
+    const { recipeId } = req.params;
+
+    const userId = req.session.userId;
+
+    try {
+        // Check if userId is available
+        if (!userId) {
+            return res.status(401).json({ error: 'Unauthorized' });
+        }
+
+        // Create a new comment with the associated user
+        const newComment = new Comment({
+            user: userId, 
+            recipe: recipeId,
+            text,
+        });
+
+        // Save
+        await newComment.save();
+
+        const recipe = await Recipe.findByIdAndUpdate(
+            recipeId,
+            { $push: { comments: newComment._id } },
+            { new: true }
+        );
+
+        await recipe.save();
+
+        res.redirect(`/recipe/${recipeId}`);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server Error' });
+    }
+});

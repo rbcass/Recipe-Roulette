@@ -16,5 +16,27 @@
         <p>Total Time: <%= recipe.totalTime %></p>
         <a href="/recipe">Back to Recipes</a>
     </div>
+
+    <div class="comment-section">
+        <h2>Comments</h2>
+        <% if (recipe.comments && Array.isArray(recipe.comments) && recipe.comments.length > 0) { %>
+            <% recipe.comments.forEach(comment => { %>
+                <div class="comment">
+                    <p><%= comment.text %></p>
+                    <% console.log('comment.user:', comment.user); %>
+                    <p>Comment by: <%= comment.user ? comment.user.username : 'Unknown User' %></p>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <p>No comments yet.</p>
+        <% } %>
+    
+        <!-- Comment form -->
+        <form action="/recipe/<%= recipe._id %>/comment" method="POST">
+            <label for="commentText">Add a Comment:</label>
+            <textarea id="commentText" name="text" required></textarea>
+            <button type="submit">Post Comment</button>
+        </form>
+    </div>
 </body>
 </html>

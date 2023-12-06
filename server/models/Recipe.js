@@ -1,7 +1,14 @@
 const mongoose = require('mongoose')
+const User = require('./User');
+const Comment = require('./Comment');
 
 const recipeSchema = new mongoose.Schema({
-
+//link user to recipe
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+    },
     title: {
         type: String,
         required: true,
@@ -22,7 +29,20 @@ const recipeSchema = new mongoose.Schema({
         type: Number,
         required: true
 
-    }
+    },
+    comments: [
+        {
+            user: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User',
+            },
+            text: String,
+            createdAt: {
+                type: Date,
+                default: Date.now,
+            },
+        },
+    ],
 })
 const Recipe = mongoose.model('recipe', recipeSchema);
 
