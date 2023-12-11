@@ -200,12 +200,12 @@ router.get('/recipes/:recipeId', async (req, res) => {
   
     try {
 
-        const recipe = await Recipe.findById(recipeId)
-        const User = require('../models/User')
-        const comments = await Comment.find({ recipe: recipeId }).populate({ path: 'user', model: User, select: 'username' });
-      
-  
-      res.render('recipeDetails', { recipe, comments });
+        const { recipeId } = req.params;
+
+        const comments = await Comment.find({ recipe: recipeId }).populate('user');
+
+
+        res.render('recipe', { recipeId, comments: comments });
     } catch (error) {
       console.error(error);
       res.render('error', { error: 'Error fetching the recipe' });
@@ -258,7 +258,7 @@ router.post('/recipe/:recipeId/comment', async (req, res) => {
             return res.status(401).json({ error: 'Unauthorized' });
         }
 
-        // Create a new comment with the associated user
+        // Create new comment with the associated user
         const newComment = new Comment({
             user: userId, 
             recipe: recipeId,
