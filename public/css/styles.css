@@ -59,6 +59,7 @@ text-decoration: line-through;
   color: #000000;
 }
 
+
 /* MAINPAGE CSS*/
 .main-page-header {
     display: flex;
@@ -88,6 +89,7 @@ text-decoration: line-through;
     margin-left: 10px;
     color: #000000; 
     font-size: 15px;
+    font-weight: 600;
     display: inline-block;
     cursor: pointer;
     text-decoration: none;
@@ -101,6 +103,7 @@ text-decoration: line-through;
 
 .home-button:hover {
     color: blue ;
+    background-color: goldenrod;
     text-shadow: 0 0 1px rgba(255, 255, 255, 0.4);
     box-shadow: 0 0 10px #fc8877;
 
@@ -210,6 +213,8 @@ text-decoration: line-through;
   /*RECIPE */
   .recipe-list {
     display: flex;
+    background-color: #141414;
+    box-shadow: 0 0 10px  #fc8877;
     flex-wrap: wrap;
     justify-content: space-around;
 }
@@ -219,7 +224,7 @@ text-decoration: line-through;
   border: 1px solid #ccc;
   border-radius: 8px;
   color: #000000;
-  width: 30%; 
+  width: 20%; 
   margin: 10px;
   box-sizing: border-box;
   /* margin: 10px; */
@@ -227,6 +232,7 @@ text-decoration: line-through;
   max-width: 300px;
   display: flex; 
   flex-direction: column; 
+  transition: transform 0.3s ease-in-out;
 }
 
 .recipe-box img {
@@ -249,8 +255,16 @@ text-decoration: line-through;
     text-decoration: none;
     color: #3498db;
     font-weight: bold;
+    
 }
 
+.recipe-box:hover {
+  transform: scale(1.05);
+}
+
+.recipe-box a:hover{
+  text-decoration: line-through;
+}
 
 /*RECIPE DETAILS*/
 .recipe-details {
@@ -347,8 +361,80 @@ text-decoration: line-through;
   transform: scale(1.15);
 }
 
+/*This button is from - https://uiverse.io/barisdogansutcu/fuzzy-bullfrog-72*/
+#addRecipeButton{
+  padding: 17px 40px;
+  border-radius: 50px;
+  cursor: pointer;
+  border: 0;
+  background-color: white;
+  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 15px;
+  transition: all 0.5s ease;
+}
+#addRecipeButton:hover{
+  letter-spacing: 3px;
+  background-color: #fc8877;
+  color: hsl(0, 0%, 100%);
+  box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
+}
+#addRecipeButton:active{
+  letter-spacing: 3px;
+  background-color: #fc8877;
+  color: hsl(0, 0%, 100%);
+  box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
+  transform: translateY(10px);
+  transition: 100ms;
+}
 
 
+/*?Comment*/
+.comment-section{
+  width: 30vh;
+}
+.comment {
+  margin-bottom: 15px;
+  color: #000000;
+  font-weight: 600;
+  padding: 15px;
+  background-color: #fff; 
+  border: 1px solid #ddd; 
+  border-radius: 8px; 
+  box-shadow: #fc8877; 
+}
 
+.comment p {
+  margin: 0;
+}
 
+.comment p:last-child {
+  margin-top: 10px; 
+}
+/*Form comment*/
 
+.comment-form {
+  max-width: 600px; 
+  padding: 20px; 
+  border: 1px solid #ccc; 
+  border-radius: 8px; 
+}
+.comment-form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px; 
+  box-sizing: border-box; 
+}
+.comment-button{
+  background-color: #fc8877;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.comment-button:hover {
+  background-color: #e56b63; 
+}

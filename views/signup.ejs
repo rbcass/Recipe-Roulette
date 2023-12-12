@@ -2,16 +2,15 @@
 <%- include('component/navbar') %>
 <div class="signin">
     
-
     <form method="POST" class="sign-in-form">
         <p class="title-sign-in">Sign up</p>
-        <label class="s_name">username</label>
-        <input type="text" class="s_name" name="username">
+        <label class="s_name">Username</label>
+        <input type="text" class="s_name" name="username" required>
         <label class="form-label">Email</label>
-        <input type="email" class="email" name="email">
+        <input type="email" class="email" name="email" required>
         <label class="form-label">Password</label>
-        <input type="password" class="password" name="password">
+        <input type="password" class="password" name="password" required>
         <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-        <p>Have an account? <a class="minitext" href="/login">Log in</a> </p>
+        <p>Have an account? <a class="minitext" href="/login">Log in</a></p>
     </form>
 </div>

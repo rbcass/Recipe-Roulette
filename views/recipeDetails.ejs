@@ -33,10 +33,10 @@
         <% } %>
     
         <!-- Comment form -->
-        <form action="/recipe/<%= recipe._id %>/comment" method="POST">
+        <form action="/recipe/<%= recipe._id %>/comment" method="POST" class="comment-form">
             <label for="commentText">Add a Comment:</label>
             <textarea id="commentText" name="text" required></textarea>
-            <button type="submit">Post Comment</button>
+            <button type="submit" class="comment-button">Post Comment</button>
         </form>
     </div>
 </body>

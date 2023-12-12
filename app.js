@@ -1,7 +1,9 @@
+const User = require('./server/models/User')
+const Recipe = require('./server/models/Recipe')
+const Comment = require('./server/models/Comment')
 const express = require('express')
 const app = express()
 const path = require('path')
-const router = require('./server/routes/routes')
 const mongoose = require('mongoose');
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
@@ -14,8 +16,17 @@ const bodyParser = require('body-parser');
 
 //bla
 const secretKey = randomString(666);
-const User = require('./server/models/User')
-const Recipe = require('./server/models/Recipe')
+
+app.use((req, res, next) => {
+  req.models = {
+    User: require('./server/models/User'), 
+    Recipe: require('./server/models/Recipe'), 
+    Comment: require('./server/models/Comment'), 
+  };
+  next();
+});
+
+const router = require('./server/routes/routes')
 
 //middleware
 app.use(session({
@@ -23,11 +34,7 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }))
-app.use((req, res, next) => {
-    req.User = User;
-    req.Recipe = Recipe;
-    next();
-  });
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());

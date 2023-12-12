@@ -132,8 +132,8 @@ router.get('/dashboard', async (req, res) => {
         }
 
         //displaying users recipes on their dashboard
-        const recipes = await Recipe.find({ user: req.session.userId }).populate('user')
-
+        const recipes = await Recipe.find({ user: user }).lean()
+        console.log('Recipes:', recipes)
 
         res.render('dashboard', { user: user, recipes: recipes }); 
     } catch (error) {
@@ -194,18 +194,18 @@ router.get('/recipe', async (req, res) => {
     }
 });
 
-//individual recipe? yes
+//individual recipe? yes    --do not change this
 router.get('/recipes/:recipeId', async (req, res) => {
     const { recipeId } = req.params;
   
     try {
 
-        const { recipeId } = req.params;
-
-        const comments = await Comment.find({ recipe: recipeId }).populate('user');
-
-
-        res.render('recipe', { recipeId, comments: comments });
+        const recipe = await Recipe.findById(recipeId)
+        const User = require('../models/User')
+        const comments = await Comment.find({ recipe: recipeId }).populate({ path: 'user', model: User, select: 'username' });
+      
+  
+      res.render('recipeDetails', { recipe, comments });
     } catch (error) {
       console.error(error);
       res.render('error', { error: 'Error fetching the recipe' });
@@ -276,7 +276,7 @@ router.post('/recipe/:recipeId/comment', async (req, res) => {
 
         await recipe.save();
 
-        res.redirect(`/recipe/${recipeId}`);
+        res.redirect('/recipe');
 
     } catch (error) {
         console.error(error);
