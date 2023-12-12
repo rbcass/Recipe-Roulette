@@ -195,7 +195,7 @@ text-decoration: line-through;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       border-radius: 8px;
       font-size: 30px;
-      background-color: #ddd;
+      background-color: #ca8d84;
   }
 
   .user-info {
@@ -208,6 +208,16 @@ text-decoration: line-through;
 
   .user-info p {
     color: #777;
+  }
+
+  .recipe-dashboard{
+    border: 1px solid #000000;
+    margin: 0 auto;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    max-width: 500px;
+    background-color: #f9f9f9;
   }
 
   /*RECIPE */
