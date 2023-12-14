@@ -1,6 +1,7 @@
 # Recipe Roulette
 
 The best recipe website, used for sharing recipes and browsing
+Use: (npm install) --> node app.js
 
 ## Features
 
